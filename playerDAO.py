@@ -39,12 +39,9 @@ class PlayerDAO:
         sql="select * from player"
         cursor.execute(sql)
         results = cursor.fetchall()
-        returnArray = []
-        #print(results)
-        for result in results:
-            #print(result)
-            returnArray.append(self.convertToDictionary(result))
-        
+        returnArray = []       
+        for result in results:           
+            returnArray.append(self.convertToDictionary(result))        
         self.closeAll()
         return returnArray
 
@@ -52,7 +49,6 @@ class PlayerDAO:
         cursor = self.getcursor()
         sql="select * from player where id = %s"
         values = (id,)
-
         cursor.execute(sql, values)
         result = cursor.fetchone()
         returnvalue = self.convertToDictionary(result)
@@ -64,7 +60,6 @@ class PlayerDAO:
         sql="insert into player (name, club, age, position) values (%s,%s,%s,%s)"
         values = (player.get("name"), player.get("club"), player.get("age"), player.get("position"))
         cursor.execute(sql, values)
-
         self.connection.commit()
         newid = cursor.lastrowid
         player["id"] = newid
@@ -74,8 +69,7 @@ class PlayerDAO:
 
     def update(self, id, player):
         cursor = self.getcursor()
-        sql="update player set name= %s,club=%s, age=%s, position=%s,  where id = %s"
-        
+        sql="update player set name= %s,club=%s, age=%s, position=%s,  where id = %s"        
         values = (player.get("name"), player.get("club"), player.get("age"), player.get("position"),id)
         cursor.execute(sql, values)
         self.connection.commit()
@@ -85,9 +79,7 @@ class PlayerDAO:
         cursor = self.getcursor()
         sql="delete from player where id = %s"
         values = (id,)
-
         cursor.execute(sql, values)
-
         self.connection.commit()
         self.closeAll()
         

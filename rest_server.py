@@ -1,4 +1,5 @@
 from flask import Flask, url_for, request, redirect, abort, jsonify
+from playerDAO import playerDAO
 
 app = Flask(__name__, static_url_path='',static_folder='staticpages')
 
@@ -14,8 +15,8 @@ def getAll():
 
 # Find by Name
 @app.route('/players/<name>', methods=['GET'])
-def findbyid():
-    return jsonify(player)
+def findbyname(name):
+    return jsonify(playerDAO.findbyname(name))
 
 # Create
 @app.route('/players', methods=['POST'])
@@ -43,6 +44,7 @@ def create():
 @app.route('/players', methods=['PUT'])
 def update():
         jsonstring = request.json
+        player={}
         if "name" in jsonstring:
                 player["name"] = jsonstring["name"]
         if "club" in jsonstring:

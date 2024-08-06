@@ -10,12 +10,12 @@ def index():
 # Get All
 @app.route('/players', methods=['GET'])
 def getAll():
-    return jsonify(players)
+    return jsonify(playerDAO.getAll())
 
 # Find by Name
-@app.route('/players/<int:id>', methods=['GET'])
+@app.route('/players/<name>', methods=['GET'])
 def findbyid():
-    return jsonify(players)
+    return jsonify(player)
 
 # Create
 @app.route('/players', methods=['POST'])

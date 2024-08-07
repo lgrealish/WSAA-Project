@@ -162,4 +162,4 @@ cython_debug/
 #.idea/
 
 #dbconfig.py
-config.py
+dbconfig.py

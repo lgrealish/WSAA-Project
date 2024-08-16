@@ -7,14 +7,15 @@
 import mysql.connector
 import dbconfig as cfg
 
-# Create a class to include all fundtions
+# Create a class to include all functions
 class PlayerDAO:
-    connection=""
-    cursor =''
     host=       ''
     user=       ''
     password=   ''
     database=   ''
+
+    connection=""
+    cursor =''
 
 # Create function to set up variables and attributes required for SQL queries
     def __init__(self):
@@ -61,10 +62,10 @@ class PlayerDAO:
         self.closeAll()
         return returnvalue
 
-# Create function to create new record in database with incremental is assignment
+# Create function to create new record in database with incremental id assignment
     def create(self, player):
         cursor = self.getcursor()
-        sql="insert into player (name, club, age, position) values (%s,%s,%s,%s)"
+        sql="insert into player (id, name, club, age, position) values (%s,%s,%s,%s,%s)"
         values = (player.get("name"), player.get("club"), player.get("age"), player.get("position"))
         cursor.execute(sql, values)
         self.connection.commit()
@@ -95,7 +96,7 @@ class PlayerDAO:
 
 # Create a function that takes a list of player attributes and outputs as a dictionary object
     def convertToDictionary(self, resultLine):
-        attkeys=['id','name','club', "age", "position"]
+        attkeys=["id","name","club", "age", "position"]
         player = {}
         currentkey = 0
         for attrib in resultLine:

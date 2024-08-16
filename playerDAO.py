@@ -1,3 +1,5 @@
+# playerDAO.py
+# Author: Linda Grealish
 # this file contains all of the DAO information
 
 # importing the modules 
@@ -14,12 +16,14 @@ class PlayerDAO:
     password=   ''
     database=   ''
 
+# Create function to set up variables and attributes required for SQL queries
     def __init__(self):
       self.host = cfg.mysql['host']
       self.user = cfg.mysql['user']
       self.password = cfg.mysql['password'] 
       self.database = cfg.mysql['database'] 
 
+# Create getcursor function to establish connection to My SQL and returns a cursor object used for executing SQL commands
     def getcursor(self): 
        self.connection = mysql.connector.connect(
            host=       self.host,
@@ -33,7 +37,8 @@ class PlayerDAO:
     def closeAll(self):
         self.connection.close()
         self.cursor.close()
-         
+
+# Create function to select all record in database        
     def getAll(self):
         cursor = self.getcursor()
         sql="select * from player"
@@ -45,6 +50,7 @@ class PlayerDAO:
         self.closeAll()
         return returnArray
 
+# Create function to search for record in database by id  
     def findByID(self, id):
         cursor = self.getcursor()
         sql="select * from player where id = %s"
@@ -55,6 +61,7 @@ class PlayerDAO:
         self.closeAll()
         return returnvalue
 
+# Create function to create new record in database with incremental is assignment
     def create(self, player):
         cursor = self.getcursor()
         sql="insert into player (name, club, age, position) values (%s,%s,%s,%s)"
@@ -66,7 +73,7 @@ class PlayerDAO:
         self.closeAll()
         return player
 
-
+# Create function to update existing records
     def update(self, id, player):
         cursor = self.getcursor()
         sql="update player set name= %s,club=%s, age=%s, position=%s,  where id = %s"        
@@ -74,7 +81,8 @@ class PlayerDAO:
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
-        
+
+# Create function to delete existing records        
     def delete(self, id):
         cursor = self.getcursor()
         sql="delete from player where id = %s"
@@ -85,6 +93,7 @@ class PlayerDAO:
         
         print("delete done")
 
+# Create a function that takes a list of player attributes and outputs as a dictionary object
     def convertToDictionary(self, resultLine):
         attkeys=['id','name','club', "age", "position"]
         player = {}

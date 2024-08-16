@@ -1,3 +1,8 @@
+# rest_server.py
+# Author: Linda Grealish
+# This file contains all code for the creating FLASK server that links to a DAO
+
+# import modules needed
 from flask import Flask, url_for, request, redirect, abort, jsonify
 from playerDAO import playerDAO
 
@@ -57,7 +62,6 @@ def update():
         return jsonify(playerDAO.update(id, player))
        
 
-
-   
+  
 if __name__ == '__main__':
     app.run(debug=True)

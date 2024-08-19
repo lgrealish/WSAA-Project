@@ -1,33 +1,116 @@
-<html lane="en">
+<html lang="en">
 
+<head>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Player Management System</title>
+    <style>
+        body {
+          font-family: Arial, sans-serif;
+          background-color: #f4f4f4;
+          margin: 0;
+          padding: 20px;
+        }
+
+        .container {
+          max-width: 800px;
+          margin: auto;
+          background: #fff;
+          padding: 20px;
+          box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        table, th, td {
+            border: 1px solid #ddd;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 15px;
+            font-size: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+
+        .btn-edit {
+            background-color: #007bff;
+        }
+
+        .btn-delete {
+            background-color: #dc3545;
+        }
+
+        .btn:hover {
+            opacity: 0.9;
+        }
+    </style>
   <head>
-      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-      <title> Player Management System</title>
-  <head>
+    <body>
+      <div class="container">
+          <h1>Player Management</h1>
+  
+          <table>
+              <thead>
+                  <tr>
+                      <th>Name</th>
+                      <th>Club</th>
+                      <th>Age</th>
+                      <th>Position</th>
+                      
+                  </tr>
+              </thead>
+              <tbody>
+                  
 
-  <body>
+                  <tr>
+                      <td>John Doe</td>
+                      <td>FC Example</td>
+                      <td>25</td>
+                      <td>Midfielder</td>
+                      <td>
+                          <a href="edit_player.html?id=1" class="btn btn-edit">Edit</a>
+                          <a href="delete_player.html?id=1" class="btn btn-delete">Delete</a>
+                      </td>
+                  </tr>
+                  
 
-    <h1>Player Management</h1>
 
-    <table border="1">
-      <thead>
-          <tr>
-              <th>Name</th>
-              <th>Club</th>
-              <th>Age</th>
-              <th>Position</th>              
-          </tr>
-      </thead>
-    <table>
+              </tbody>
+          </table>
+  
+          <a href="add_player.html" class="btn">Add New Player</a>
+      </div>
+  </body>
+  </html>
 
-    <div id="searchbyname">
-      <input type="text" value="Enter Player Name" id="name"><br/>
-      <input type="submit" value="Submit"/><br/>
-      <button onclick="playerDAO.create(self, player)">Submit Player</button>
-    
-    
-    </div>
 
-  </body>  
 
-   </html>
+
+
+

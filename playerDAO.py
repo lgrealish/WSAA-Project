@@ -104,5 +104,5 @@ class PlayerDAO:
             currentkey = currentkey + 1 
         return player
 
-        
+# Class init        
 playerDAO = PlayerDAO()

@@ -4,13 +4,14 @@
 
 # import modules needed
 from flask import Flask, url_for, request, redirect, abort, jsonify
-from flask_sqlalchemy import SQLAlchemy
+# from flask_sqlalchemy import SQLAlchemy
 from playerDAO import playerDAO
 
 app = Flask(__name__, static_url_path='',static_folder='staticpages')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///players.db'
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
+#app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///players.db'
+#app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+#db = SQLAlchemy(app)
+
 
 # Set up initial home page and test
 @app.route('/')
@@ -62,10 +63,13 @@ def update():
                 player["age"] = jsonstring["age"]
         if "position" in jsonstring:
                 player["position"] = jsonstring["position"]
-    
+       
         return jsonify(playerDAO.update(id, player))
        
-
+# Delete
+@app.route('/players/<name>', methods=['DELETE'])
+def delete(name):
+        return jsonify(playerDAO.delete(name))
   
 if __name__ == '__main__':
     app.run(debug=True)

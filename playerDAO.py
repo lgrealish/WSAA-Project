@@ -51,11 +51,11 @@ class PlayerDAO:
         self.closeAll()
         return returnArray
 
-# Create function to search for record in database by id  
-    def findByID(self, id):
+# Create function to search for record in database by name  
+    def findbyname(self, name):
         cursor = self.getcursor()
-        sql="select * from player where id = %s"
-        values = (id,)
+        sql="select * from player where name = %s"
+        values = (name,)
         cursor.execute(sql, values)
         result = cursor.fetchone()
         returnvalue = self.convertToDictionary(result)
@@ -65,8 +65,8 @@ class PlayerDAO:
 # Create function to create new record in database with incremental id assignment
     def create(self, player):
         cursor = self.getcursor()
-        sql="insert into player (id, name, club, age, position) values (%s,%s,%s,%s,%s)"
-        values = (player.get("name"), player.get("club"), player.get("age"), player.get("position"))
+        sql="insert into player (Name, Club, Age, Position) values (%s,%s,%s,%s,%s)"
+        values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"))
         cursor.execute(sql, values)
         self.connection.commit()
         newid = cursor.lastrowid

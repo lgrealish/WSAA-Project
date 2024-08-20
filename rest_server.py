@@ -4,7 +4,6 @@
 
 # import modules needed
 from flask import Flask, url_for, request, redirect, abort, jsonify, render_template
-
 from playerDAO import playerDAO
 
 app = Flask(__name__, static_url_path='',static_folder='staticpages')
@@ -29,13 +28,22 @@ def findbyname(name):
 def create():
         # read json from the body
         jsonstring = request.json
+        
+        required_fields = ["Name", "Club", "Age", "Position"]
+        for field in required_fields:
+               if field not in jsonstring:
+                abort(400, description=f"Missing required field: {field}")
+                
+               
         player = {
                "Name": request.json['Name'],
                "Club": request.json['Club'],
                "Age": request.json['Age'],
                "Position": request.json['Position']
         }
-
+        
+        return jsonify(playerDAO.create(player))
+'''
         if "name" not in jsonstring:
                 abort(402)
         player["name"] = jsonstring["name"]
@@ -48,8 +56,8 @@ def create():
         if "position" not in jsonstring:
                 abort(402)
         player["position"] = jsonstring["position"]
-        
-        return jsonify(playerDAO.create(player))
+'''        
+        #return jsonify(playerDAO.create(player))
 
 # Update
 @app.route('/players', methods=['PUT'])

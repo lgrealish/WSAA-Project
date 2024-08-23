@@ -23,21 +23,29 @@ class PlayerDAO:
       self.user = cfg.mysql['user']
       self.password = cfg.mysql['password'] 
       self.database = cfg.mysql['database'] 
+      self.connection = None
+      self.cursor = None
 
 # Create getcursor function to establish connection to My SQL and returns a cursor object used for executing SQL commands
     def getcursor(self): 
-       self.connection = mysql.connector.connect(
-           host=       self.host,
-           user=       self.user,
-           password=   self.password,
-           database=   self.database,
-        )
-       self.cursor = self.connection.cursor()
-       return self.cursor
+       try:
+        self.connection = mysql.connector.connect(
+            host=       self.host,
+            user=       self.user,
+            password=   self.password,
+            database=   self.database,
+            )
+        self.cursor = self.connection.cursor()
+        return self.cursor
+       except mysql.connector.Error as err:
+           print(f"Error : {err}")
+           return None
 
     def closeAll(self):
-        self.connection.close()
-        self.cursor.close()
+        if self.cursor:
+            self.cursor.close()
+        if self.connection:
+            self.connection.close()
 
 # Create function to select all record in database        
     def getAll(self):
@@ -58,7 +66,7 @@ class PlayerDAO:
         values = (name,)
         cursor.execute(sql, values)
         result = cursor.fetchone()
-        returnvalue = self.convertToDictionary(result)
+        returnvalue = self.convertToDictionary(result) if result else None
         self.closeAll()
         return returnvalue
 
@@ -77,7 +85,7 @@ class PlayerDAO:
 # Create function to update existing records
     def update(self, id, player):
         cursor = self.getcursor()
-        sql="update player set Name= %s, Club=%s, Age=%s, Position=%s"        
+        sql="update player set Club=%s, Age=%s, Position=%s where name=%s"        
         values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"),id)
         cursor.execute(sql, values)
         self.connection.commit()

@@ -37,12 +37,11 @@ def create():
                 
                
         player = {
-               "Name": request.json['Name'],
-               "Club": request.json['Club'],
-               "Age": request.json['Age'],
-               "Position": request.json['Position']
+               "Name": jsonstring['Name'],
+               "Club": jsonstring['Club'],
+               "Age": jsonstring['Age'],
+               "Position": jsonstring['Position']
         }
-        
         newplayer = playerDAO.create(player)
         return jsonify(newplayer)
 '''
@@ -62,8 +61,8 @@ def create():
         #return jsonify(playerDAO.create(player))
 
 # Update
-@app.route('/players', methods=['PUT'])
-def update():
+@app.route('/players<name>', methods=['PUT'])
+def update(name):
         jsonstring = request.json
         player={}
         if "name" in jsonstring:
@@ -75,11 +74,12 @@ def update():
         if "position" in jsonstring:
                 player["position"] = jsonstring["position"]
        
-        return jsonify(playerDAO.update(id, player))
+        return jsonify(playerDAO.update(name, player))
        
 # Delete
 @app.route('/players/<name>', methods=['DELETE'])
 def delete(name):
+        result = playerDAO.delete(name)
         return jsonify(playerDAO.delete(name))
   
 if __name__ == '__main__':

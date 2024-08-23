@@ -83,19 +83,20 @@ class PlayerDAO:
         return player
 
 # Create function to update existing records
-    def update(self, id, player):
+    def update(self, name, player):
         cursor = self.getcursor()
         sql="update player set Club=%s, Age=%s, Position=%s where name=%s"        
         values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"),id)
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
+        return self.findbyname(name)
 
 # Create function to delete existing records        
-    def delete(self, id):
+    def delete(self, name):
         cursor = self.getcursor()
-        sql="delete from player where id = %s"
-        values = (id,)
+        sql="delete from player WHERE name = %s"
+        values = (name,)
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()

@@ -13,6 +13,7 @@ app = Flask(__name__, static_url_path='',static_folder='staticpages')
 def index():
     return render_template('playerdetails.html')
 
+
 # Get All
 @app.route('/players', methods=['GET'])
 def getAll():
@@ -42,7 +43,8 @@ def create():
                "Position": request.json['Position']
         }
         
-        return jsonify(playerDAO.create(player))
+        newplayer = playerDAO.create(player)
+        return jsonify(newplayer)
 '''
         if "name" not in jsonstring:
                 abort(402)

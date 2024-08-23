@@ -16,3 +16,15 @@ The task was to create a basic Flask server that has a;
 This repository and all files within it can be access at [https://github.com/lgrealish/fundamentals-of-data-analysis](https://github.com/lgrealish/WSAA-Project.git).
 
 ## How to run the code
+
+  1. Install Ananconda.
+  2. Install VS Code.
+  3. Clone Repository.
+  4. Open repository in VS Code.
+  5. Open terminal and run 'python rest_server.py'
+  6. Open http://127.0.0.1:5000 in web browser.
+
+## Technologies Used
+
+  * Visual Studio Code - version 1.92.2
+  * Python 3.11.4

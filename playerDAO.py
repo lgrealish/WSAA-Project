@@ -77,8 +77,8 @@ class PlayerDAO:
 # Create function to update existing records
     def update(self, id, player):
         cursor = self.getcursor()
-        sql="update player set name= %s,club=%s, age=%s, position=%s,  where id = %s"        
-        values = (player.get("name"), player.get("club"), player.get("age"), player.get("position"),id)
+        sql="update player set Name= %s, Club=%s, Age=%s, Position=%s"        
+        values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"),id)
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
@@ -92,7 +92,7 @@ class PlayerDAO:
         self.connection.commit()
         self.closeAll()
         
-        print("delete done")
+        print("Player record deleted")
 
 # Create a function that takes a list of player attributes and outputs as a dictionary object
     def convertToDictionary(self, resultLine):

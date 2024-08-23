@@ -26,7 +26,7 @@ def findbyname(name):
 
 # Create
 @app.route('/players', methods=['POST'])
-def create():
+def create(id):
         # read json from the body
         jsonstring = request.json
         
@@ -43,7 +43,7 @@ def create():
                "Position": jsonstring['Position']
         }
         newplayer = playerDAO.create(player)
-        return jsonify(newplayer)
+        return jsonify(playerDAO.create(id))
 '''
         if "name" not in jsonstring:
                 abort(402)
@@ -79,7 +79,6 @@ def update(name):
 # Delete
 @app.route('/players/<name>', methods=['DELETE'])
 def delete(name):
-        result = playerDAO.delete(name)
         return jsonify(playerDAO.delete(name))
   
 if __name__ == '__main__':

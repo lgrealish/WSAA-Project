@@ -2,7 +2,7 @@
 # Author: Linda Grealish
 # this file contains all of the DAO information
 
-# importing the modules 
+# Importing the modules 
 
 import mysql.connector
 import dbconfig as cfg
@@ -17,7 +17,8 @@ class PlayerDAO:
     connection=""
     cursor =''
 
-# Create function to set up variables and attributes required for SQL queries
+
+# Create function to set up variables and attributes required for SQL queries and read in from 
     def __init__(self):
       self.host = cfg.mysql['host']
       self.user = cfg.mysql['user']
@@ -50,7 +51,7 @@ class PlayerDAO:
 # Create function to select all record in database        
     def getAll(self):
         cursor = self.getcursor()
-        sql="select * from player"
+        sql ="select * from player"
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []       

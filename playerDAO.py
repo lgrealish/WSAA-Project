@@ -65,7 +65,7 @@ class PlayerDAO:
 # Create function to create new record in database with incremental id assignment
     def create(self, player):
         cursor = self.getcursor()
-        sql="insert into player (Name, Club, Age, Position) values (%s,%s,%s,%s,%s)"
+        sql="insert into player (Name, Club, Age, Position) values (%s,%s,%s,%s)"
         values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"))
         cursor.execute(sql, values)
         self.connection.commit()

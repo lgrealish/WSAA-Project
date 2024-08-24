@@ -47,7 +47,7 @@ $(document).ready(function () {
       if (id) {
           // Update existing player
           $.ajax({
-              url: `/api/players/${id}`,
+              url: `/players/${id}`,
               method: 'PUT',
               contentType: 'application/json',
               data: JSON.stringify(playerData),
@@ -59,7 +59,7 @@ $(document).ready(function () {
       } else {
           // Create new player
           $.ajax({
-              url: '/api/players',
+              url: '/players',
               method: 'POST',
               contentType: 'application/json',
               data: JSON.stringify(playerData),
@@ -74,7 +74,7 @@ $(document).ready(function () {
   window.editPlayer = function (id) {
       // Fetch player data to populate the form for editing
       $.ajax({
-          url: `/api/players/${id}`,
+          url: `/players/${id}`,
           method: 'GET',
           success: function (player) {
               $('#playerId').val(player.id);
@@ -92,7 +92,7 @@ $(document).ready(function () {
       // Delete player by ID
       if (confirm('Are you sure you want to delete this player?')) {
           $.ajax({
-              url: `/api/players/${id}`,
+              url: `/players/${id}`,
               method: 'DELETE',
               success: function () {
                   loadPlayers();

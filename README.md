@@ -1,9 +1,12 @@
 # WSAA-Project
 
+## Note to Andrew
+
+Thank you for allowing the defer.  Despite my best efforts I cannot seem to get the code working.  I have been having significant issues with connecting to mysql as I'm using a work laptop and IT restrictions have not helped as I have struggled with testing as I go, or it is simply that my code is incorrect!  Either way, not my best work so apologies in advance for the poor content.
 
 ## Summary
 
-This repository contains my submission for the WebServices and Applications module 2024 at ATU as part of the Higher Diploma in Computing and Data Analytics.  The app relates to a fictional Player Management System that allows the user to create new users, updated or delete existiong ones.
+This repository contains my submission for the WebServices and Applications module 2024 at ATU as part of the Higher Diploma in Computing and Data Analytics.  The app relates to a fictional Player Management System that allows the user to create new users, updated or delete existiong ones.  
 
 ## Task
 

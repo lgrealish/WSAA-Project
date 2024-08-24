@@ -9,39 +9,32 @@ $(document).ready(function () {
               $('#playerTable tbody').empty();
               players.forEach(function (player) {
                   $('#playerTable tbody').append(`
-                      <tr data-id="${player.id}">
+                      <tr id="${player.id}">
                           <td>${player.name}</td>
                           <td>${player.club}</td>
                           <td>${player.age}</td>
                           <td>${player.position}</td>
                           <td>
-                              <button class="btn btn-info" onclick="editPlayer(${player.id})">Edit</button>
-                              <button class="btn btn-danger" onclick="deletePlayer(${player.id})">Delete</button>
+                              <button class="btn btn-info" onclick="editPlayer('${player.name}')">Edit</button>
+                              <button class="btn btn-danger" onclick="deletePlayer('${player.name}')">Delete</button>
                           </td>
                       </tr>
                   `);
               });
+          },
+          error: function (err) {
+              console.error('Error fetching players:', err);
           }
       });
   }
 
-  window.showCreatePlayerForm = function () {
-      $('#playerId').val('');
-      $('#name').val('');
-      $('#club').val('');
-      $('#age').val('');
-      $('#position').val('');
-      $('#modalTitle').text('Add Player');
-      $('#playerModal').modal('show');
-  };
-
   window.savePlayer = function () {
       const id = $('#playerId').val();
       const playerData = {
-          name: $('#name').val(),
-          club: $('#club').val(),
-          age: $('#age').val(),
-          position: $('#position').val()
+          Name: $('#name').val(),
+          Club: $('#club').val(),
+          Age: $('#age').val(),
+          Position: $('#position').val()
       };
 
       if (id) {
@@ -54,6 +47,9 @@ $(document).ready(function () {
               success: function () {
                   $('#playerModal').modal('hide');
                   loadPlayers();
+              },
+              error: function (err) {
+                  console.error('Error updating player:', err);
               }
           });
       } else {
@@ -66,36 +62,24 @@ $(document).ready(function () {
               success: function () {
                   $('#playerModal').modal('hide');
                   loadPlayers();
+              },
+              error: function (err) {
+                  console.error('Error creating player:', err);
               }
           });
       }
   };
 
-  window.editPlayer = function (id) {
-      // Fetch player data to populate the form for editing
-      $.ajax({
-          url: `/players/${id}`,
-          method: 'GET',
-          success: function (player) {
-              $('#playerId').val(player.id);
-              $('#name').val(player.name);
-              $('#club').val(player.club);
-              $('#age').val(player.age);
-              $('#position').val(player.position);
-              $('#modalTitle').text('Edit Player');
-              $('#playerModal').modal('show');
-          }
-      });
-  };
-
-  window.deletePlayer = function (id) {
-      // Delete player by ID
+  window.deletePlayer = function (name) {
       if (confirm('Are you sure you want to delete this player?')) {
           $.ajax({
-              url: `/players/${id}`,
+              url: `/players/${name}`,
               method: 'DELETE',
               success: function () {
                   loadPlayers();
+              },
+              error: function (err) {
+                  console.error('Error deleting player:', err);
               }
           });
       }

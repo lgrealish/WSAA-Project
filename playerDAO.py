@@ -9,6 +9,7 @@ import dbconfig as cfg
 
 # Create a class to include all functions
 class PlayerDAO:
+    '''
     host=       ''
     user=       ''
     password=   ''
@@ -16,6 +17,7 @@ class PlayerDAO:
 
     connection=""
     cursor =''
+    '''
 
 
 # Create function to set up variables and attributes required for SQL queries and read in from 

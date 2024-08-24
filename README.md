@@ -1,8 +1,9 @@
 # WSAA-Project
 
+
 ## Summary
 
-his repository contains my submission for the WebServices and Applications module 2024 at ATU as part of the Higher Diploma in Computing and Data Analytics.  
+This repository contains my submission for the WebServices and Applications module 2024 at ATU as part of the Higher Diploma in Computing and Data Analytics.  The app relates to a fictional Player Management System that allows the user to create new users, updated or delete existiong ones.
 
 ## Task
 
@@ -21,8 +22,14 @@ This repository and all files within it can be access at [https://github.com/lgr
   2. Install VS Code.
   3. Clone Repository.
   4. Open repository in VS Code.
-  5. Open terminal and run 'python rest_server.py'
-  6. Open http://127.0.0.1:5000 in web browser.
+  5. Download packages and libraries from 
+  6. Open terminal and run 'python rest_server.py'
+  7. Open http://127.0.0.1:5000 in web browser.
+
+## Requirements
+Flask
+mysql-connector-python
+Werkzeug
 
 ## Technologies Used
 

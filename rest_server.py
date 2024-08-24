@@ -20,13 +20,13 @@ def getAll():
     return jsonify(playerDAO.getAll())
 
 # Find by Name
-@app.route('/players/<name>', methods=['GET'])
+@app.route('/players/<string:name>', methods=['GET'])
 def findbyname(name):
     return jsonify(playerDAO.findbyname(name))
 
 # Create
 @app.route('/players', methods=['POST'])
-def create(id):
+def create():
         # read json from the body
         jsonstring = request.json
         
@@ -43,43 +43,30 @@ def create(id):
                "Position": jsonstring['Position']
         }
         newplayer = playerDAO.create(player)
-        return jsonify(playerDAO.create(id))
-'''
-        if "name" not in jsonstring:
-                abort(402)
-        player["name"] = jsonstring["name"]
-        if "club" not in jsonstring:
-                abort(402)
-        player["club"] = jsonstring["club"]
-        if "age" not in jsonstring:
-                abort(402)
-        player["age"] = jsonstring["age"]
-        if "position" not in jsonstring:
-                abort(402)
-        player["position"] = jsonstring["position"]
-'''        
-        #return jsonify(playerDAO.create(player))
+        return jsonify(newplayer)
 
 # Update
-@app.route('/players<name>', methods=['PUT'])
+@app.route('/players<string:name>', methods=['PUT'])
 def update(name):
         jsonstring = request.json
         player={}
-        if "name" in jsonstring:
-                player["name"] = jsonstring["name"]
-        if "club" in jsonstring:
-                player["club"] = jsonstring["club"]
-        if "age" in jsonstring:
-                player["age"] = jsonstring["age"]
-        if "position" in jsonstring:
-                player["position"] = jsonstring["position"]
+        if "Name" in jsonstring:
+                player["Name"] = jsonstring["Name"]
+        if "Club" in jsonstring:
+                player["Club"] = jsonstring["Club"]
+        if "Age" in jsonstring:
+                player["Age"] = jsonstring["Age"]
+        if "Position" in jsonstring:
+                player["Position"] = jsonstring["Position"]
        
-        return jsonify(playerDAO.update(name, player))
+        updatedplayer = playerDAO.update(name, player)
+        return jsonify(updatedplayer)
        
 # Delete
 @app.route('/players/<name>', methods=['DELETE'])
 def delete(name):
-        return jsonify(playerDAO.delete(name))
+        deletedplayer = playerDAO.delete(name)
+        return jsonify(deletedplayer)
   
 if __name__ == '__main__':
     app.run(debug=True)

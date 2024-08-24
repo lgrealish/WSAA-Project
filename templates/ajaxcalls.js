@@ -3,7 +3,7 @@ $(document).ready(function () {
 
   function loadPlayers() {
       $.ajax({
-          url: '/api/players',
+          url: '/players',
           method: 'GET',
           success: function (players) {
               $('#playerTable tbody').empty();

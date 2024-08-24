@@ -51,7 +51,7 @@ class PlayerDAO:
 # Create function to select all record in database        
     def getAll(self):
         cursor = self.getcursor()
-        sql ="select * from players"
+        sql ="SELECT * FROM players"
         cursor.execute(sql)
         results = cursor.fetchall()
         returnArray = []       
@@ -63,7 +63,7 @@ class PlayerDAO:
 # Create function to search for record in database by name  
     def findbyname(self, name):
         cursor = self.getcursor()
-        sql="select * from players where name = %s"
+        sql="SELECT * FROM players WHERE Name = %s"
         values = (name,)
         cursor.execute(sql, values)
         result = cursor.fetchone()
@@ -74,7 +74,7 @@ class PlayerDAO:
 # Create function to create new record in database with incremental id assignment
     def create(self, player):
         cursor = self.getcursor()
-        sql="insert into players (Name, Club, Age, Position) values (%s,%s,%s,%s)"
+        sql="INSERT INTO players (Name, Club, Age, Position) values (%s,%s,%s,%s)"
         values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"))
         cursor.execute(sql, values)
         self.connection.commit()
@@ -84,20 +84,20 @@ class PlayerDAO:
         return player
 
 # Create function to update existing records
-    def update(self, id, player):
+    def update(self, name, player):
         cursor = self.getcursor()
-        sql="update players set name= %s, club=%s, age=%s, position=%s where id=%s"        
+        sql="UPDATE players SET Name= %s, Club=%s, Age=%s, Position=%s WHERE Name=%s"        
         values = (player.get("Name"), player.get("Club"), player.get("Age"), player.get("Position"),id)
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
-        return self.findbyname(id)
+        return self.findbyname(name)
 
 # Create function to delete existing records        
-    def delete(self, id):
+    def delete(self, name):
         cursor = self.getcursor()
-        sql="delete from player WHERE id = %s"
-        values = (id,)
+        sql="DELETE FROM players WHERE Name = %s"
+        values = (name,)
         cursor.execute(sql, values)
         self.connection.commit()
         self.closeAll()
